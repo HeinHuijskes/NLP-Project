@@ -1,3 +1,4 @@
 data/
 nlpprojectvenv/
 output/
+__pycache__/

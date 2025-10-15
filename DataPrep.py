@@ -89,6 +89,11 @@ def vocabulary(docs: list[list[str]]) -> tuple[list[list[str]], list[str]]:
     return result, list(vocab)
 
 
+def write_out(data, columns, location):
+    df = pd.DataFrame(data, columns=columns)
+    df.to_csv(f'output/{location}')
+
+
 def remove_rare_words(docs: list[list[str]], limit=1) -> list[list[str]]:
     '''Remove words that occur in less than a given proportion of documents'''
     unique_docs, vocab = vocabulary(docs)
@@ -113,6 +118,11 @@ def remove_rare_words(docs: list[list[str]], limit=1) -> list[list[str]]:
         removed += [word for word in doc if int(distribution.freq(word) * size) <= limit]
         result.append(new_doc)
     new_vocab = [word for word in vocab if int(distribution.freq(word) * size) > limit]
+
+    output = []
+    for word in vocab:
+        output.append([word, int(distribution.freq(word) * size), int(distribution.freq(word) * size) > limit])
+    write_out(output, ['word', 'occurence', 'included'])
 
     print(f'\nRemoved all words occuring {limit} or less times')
     print(f'Reduced vocab from {len(vocab)} to {len(new_vocab)} words')

@@ -15,3 +15,4 @@
 * Check whether any songs are not in English, and should have other stop word removal
 * Maybe check to see if there are better ways to stem/lemmatize especially rap lyrics, since it tends to use slang. The paper should also have info on this.
 * Maybe check whether we an add a stem step in between to catch words like "goddddd" and reduce it to "god", and see if this actually helps.
+* Maybe check whether a word is just a number, and then remove it (if it does not occur often enough? maybe this is automatic anyway)
