@@ -132,20 +132,30 @@ def remove_rare_words(docs: list[list[str]], limit=1) -> list[list[str]]:
 
 def preprocess(docs: list[str], stem_words=True, limit=0) -> list[list[str]]:
     '''Apply all preprocessing steps to the given docs'''
+    print("Preprocessing data")
+    print("Removing notes in [brackets]")
     noteless = remove_notes(docs)
+    print("Removing punctuation")
     just_words = remove_punctuation(noteless)
+    print("Normalizing")
     normalized = normalize(just_words)
+    print("Tokenizing")
     tokens = tokenize(normalized)
+    print("Removing stopwords")
     no_stopwords = remove_stopwords(tokens)
 
     if stem_words:
+        print("Stemming")
         documents = stem(no_stopwords)
     else:
+        print("Lemmatizing")
         documents = lemmatize(no_stopwords)
 
     if limit > 0:
+        print("Removing rare words")
         documents = remove_rare_words(documents, limit=limit)
 
+    print("Finished data preparation!")
     return documents
 
 
