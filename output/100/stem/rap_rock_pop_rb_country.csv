@@ -1,0 +1,3 @@
+,stem,accuracy,f1score
+0,stem,0.58,0.5826264822134387
+0,lemmatize,0.52,0.5254177401545822
