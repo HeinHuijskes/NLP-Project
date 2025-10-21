@@ -6,6 +6,7 @@ from nltk.stem import WordNetLemmatizer, PorterStemmer
 from nltk import FreqDist
 from nltk.corpus import stopwords
 nltk.download('stopwords')
+nltk.download('wordnet')
 
 
 def remove_notes(docs: list[str]) -> list[str]:
@@ -94,7 +95,7 @@ def write_out(data, columns, location):
     df.to_csv(f'output/{location}')
 
 
-def remove_rare_words(docs: list[list[str]], limit=1) -> list[list[str]]:
+def remove_rare_words(docs: list[list[str]], limit=1, location='', debug=True, return_count=False) -> list[list[str]]:
     '''Remove words that occur in less than a given proportion of documents'''
     unique_docs, vocab = vocabulary(docs)
     all_words = []
@@ -104,12 +105,13 @@ def remove_rare_words(docs: list[list[str]], limit=1) -> list[list[str]]:
     distribution = FreqDist(all_words)
     distribution_words = list(distribution)
 
-    print(f'Total words: {size}')
-    print(f'Unique words: {len(vocab)}')
-    print('Most frequent:')
-    print('; '.join([f'{word}: {int(distribution.freq(word) * size)}' for word in distribution_words[:10]]))
-    print('Least frequent:')
-    print(' - '.join([f'{word}: {int(distribution.freq(word) * size)}' for word in distribution_words[-10:]]))
+    if debug:
+        print(f'Total words: {size}')
+        print(f'Unique words: {len(vocab)}')
+        print('Most frequent:')
+        print('; '.join([f'{word}: {int(distribution.freq(word) * size)}' for word in distribution_words[:10]]))
+        print('Least frequent:')
+        print(' - '.join([f'{word}: {int(distribution.freq(word) * size)}' for word in distribution_words[-10:]]))
 
     result = []
     removed = []
@@ -122,71 +124,59 @@ def remove_rare_words(docs: list[list[str]], limit=1) -> list[list[str]]:
     output = []
     for word in vocab:
         output.append([word, int(distribution.freq(word) * size), int(distribution.freq(word) * size) > limit])
-    write_out(output, ['word', 'occurence', 'included'])
+    if location != '':
+        write_out(output, ['word', 'occurence', 'included'], location)
 
-    print(f'\nRemoved all words occuring {limit} or less times')
-    print(f'Reduced vocab from {len(vocab)} to {len(new_vocab)} words')
-    # print(f'Removed: {(list(set(removed)))}')
-    return result
+    if debug:
+        print(f'\nRemoved all words occuring {limit} or less times')
+        print(f'Reduced vocab from {len(vocab)} to {len(new_vocab)} words')
+
+    if not return_count:
+        return result
+    else:
+        return [len(vocab), len(new_vocab), result]
 
 
-def preprocess(docs: list[str], stem_words=True, limit=0) -> list[list[str]]:
+def preprocess(docs: list[str], stem_words=True, limit=0, debug=True, return_count=False) -> list[str]:
     '''Apply all preprocessing steps to the given docs'''
-    print("Preprocessing data")
-    print("Removing notes in [brackets]")
+    if debug: print("Preprocessing data")
+    if debug: print("Removing notes in [brackets]")
     noteless = remove_notes(docs)
-    print("Removing punctuation")
+    if debug: print("Removing punctuation")
     just_words = remove_punctuation(noteless)
-    print("Normalizing")
+    if debug: print("Normalizing")
     normalized = normalize(just_words)
-    print("Tokenizing")
+    if debug: print("Tokenizing")
     tokens = tokenize(normalized)
-    print("Removing stopwords")
+    if debug: print("Removing stopwords")
     no_stopwords = remove_stopwords(tokens)
 
     if stem_words:
-        print("Stemming")
+        if debug: print("Stemming")
         documents = stem(no_stopwords)
     else:
-        print("Lemmatizing")
+        if debug: print("Lemmatizing")
         documents = lemmatize(no_stopwords)
 
-    if limit > 0:
-        print("Removing rare words")
-        documents = remove_rare_words(documents, limit=limit)
+    if limit > 0 or return_count:
+        if debug: print("Removing rare words")
+        documents = remove_rare_words(documents, limit=limit, debug=debug, return_count=return_count)
 
-    print("Finished data preparation!")
-    return documents
+    if debug: print("Finished data preparation!")
+    if not return_count:
+        return [' '.join(doc) for doc in documents]
+    else:
+        old, total, documents = documents
+        return old, total, [' '.join(doc) for doc in documents]
 
 
 if __name__ == "__main__":
     genres = ['rap', 'rock', 'pop']
-    limit = '10k'
+    limit = '1000'
     filename = f'data/song_lyrics_reduced_{"_".join(genres)}_{limit}.csv'
 
     print("Loading csv")
     df = pd.read_csv(filename)
     documents = df['lyrics']
     print("Loaded succesfully")
-
-    print("\nPreprocessing data")
-    noteless = remove_notes(documents)
-    just_words = remove_punctuation(noteless)
-    normalized = normalize(just_words)
-    tokens = tokenize(normalized)
-    no_stopwords = remove_stopwords(tokens)
-
-    print("Lemmatizing")
-    lemmatized = lemmatize(no_stopwords)
-    for document in lemmatized[:5]:
-        print(' '.join(document))
-
-    print("\nStemming")
-    stemmed = stem(no_stopwords)
-    for document in stemmed[:5]:
-        print(' '.join(document))
-
-    print("\nRemoving rare words (lemmatized)")
-    no_rare_words = remove_rare_words(lemmatized, limit=3)
-    print("\nRemoving rare words (stemmed)")
-    no_rare_words = remove_rare_words(stemmed, limit=3)
+    preprocess(documents, debug=True)
