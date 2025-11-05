@@ -95,7 +95,7 @@ def write_out(data, columns, location):
     df.to_csv(f'output/{location}')
 
 
-def remove_rare_words(docs: list[list[str]], limit=1, other_limit=0, location='', debug=True, return_count=False) -> list[list[str]]:
+def remove_rare_words(docs: list[list[str]], limit=1, location='', debug=True, return_count=False) -> list[list[str]]:
     '''Remove words that occur in less than a given proportion of documents'''
     unique_docs, vocab = vocabulary(docs)
     all_words = []
@@ -109,21 +109,21 @@ def remove_rare_words(docs: list[list[str]], limit=1, other_limit=0, location=''
         print(f'Total words: {size}')
         print(f'Unique words: {len(vocab)}')
         print('Most frequent:')
-        print('; '.join([f'{word}: {int(distribution.freq(word) * size)}' for word in distribution_words[:10]]))
+        print('; '.join([f'{word}: {round(distribution.freq(word) * size)}' for word in distribution_words[:10]]))
         print('Least frequent:')
-        print(' - '.join([f'{word}: {int(distribution.freq(word) * size)}' for word in distribution_words[-10:]]))
+        print(' - '.join([f'{word}: {round(distribution.freq(word) * size)}' for word in distribution_words[-10:]]))
 
     result = []
     removed = []
     for doc in docs:
-        new_doc = [word for word in doc if not other_limit < int(distribution.freq(word) * size) < limit]
-        removed += [word for word in doc if other_limit < int(distribution.freq(word) * size) < limit]
+        new_doc = [word for word in doc if round(distribution.freq(word) * size) > limit]
+        removed += [word for word in doc if round(distribution.freq(word) * size) <= limit]
         result.append(new_doc)
-    new_vocab = [word for word in vocab if not other_limit < int(distribution.freq(word) * size) < limit]
+    new_vocab = [word for word in vocab if round(distribution.freq(word) * size) > limit]
 
     output = []
     for word in vocab:
-        output.append([word, int(distribution.freq(word) * size), int(distribution.freq(word) * size) > limit])
+        output.append([word, round(distribution.freq(word) * size), round(distribution.freq(word) * size) > limit])
     if location != '':
         write_out(output, ['word', 'occurence', 'included'], location)
 
@@ -137,7 +137,7 @@ def remove_rare_words(docs: list[list[str]], limit=1, other_limit=0, location=''
         return [len(vocab), len(new_vocab), result]
 
 
-def preprocess(docs: list[str], stem_words=True, limit=0, other_limit=0, debug=True, return_count=False) -> list[str]:
+def preprocess(docs: list[str], stem_words=True, limit=0, debug=True, return_count=False) -> list[str]:
     '''Apply all preprocessing steps to the given docs'''
     if debug: print("Preprocessing data")
     if debug: print("Removing notes in [brackets]")
@@ -160,7 +160,7 @@ def preprocess(docs: list[str], stem_words=True, limit=0, other_limit=0, debug=T
 
     if limit > 0 or return_count:
         if debug: print("Removing rare words")
-        documents = remove_rare_words(documents, limit=limit, other_limit=other_limit, debug=debug, return_count=return_count)
+        documents = remove_rare_words(documents, limit=limit, debug=debug, return_count=return_count)
 
     if debug: print("Finished data preparation!")
     if not return_count:
