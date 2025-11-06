@@ -1,0 +1,11 @@
+LICENSE
+MANIFEST.in
+README.md
+rid.py
+setup.cfg
+setup.py
+regressive_imagery_dictionary.egg-info/PKG-INFO
+regressive_imagery_dictionary.egg-info/SOURCES.txt
+regressive_imagery_dictionary.egg-info/dependency_links.txt
+regressive_imagery_dictionary.egg-info/entry_points.txt
+regressive_imagery_dictionary.egg-info/top_level.txt

@@ -1,0 +1,201 @@
+<html><head>
+<meta http-equiv='content-type' content='text/html; charset=UTF-8'>
+
+    <style type="text/css">
+        .word-count { vertical-align: super; font-size: 50%; }
+        .twisty { color: blue; font-family: monospace; }
+        a.twisty { text-decoration: none; }
+    </style>
+
+<title>Yeah bb</title>
+
+<script>
+
+var TWISTY_EXPANDED = ' &#9662; ';
+var TWISTY_COLLAPSED = ' &#9656; ';
+
+function allWordNodes() {
+    var nodes = document.getElementsByTagName("tr");
+    var results = new Array();
+    var numResults = 0;
+
+    for (i = 0; i < nodes.length; i++) {
+        var node = nodes.item(i);
+        if (node.className == 'words') {
+            results[numResults] = node;
+            numResults++;
+        }
+    }
+    return results;
+}
+
+function hideAll() {
+    allNodes = allWordNodes();
+    for (var i = 0; i < allNodes.length; i++) {
+        hide(allNodes[i]);
+    }
+}
+
+function showAll() {
+    allNodes = allWordNodes();
+    for (var i = 0; i < allNodes.length; i++) {
+        show(allNodes[i]);
+    }
+}
+
+function get_twisty_node(category) {
+    var cell = document.getElementById(category + "-cat");
+    return cell.childNodes[0];
+}
+
+function hide(element) {
+    element.style.display = "none";
+    var twisty = get_twisty_node(element.id);
+    twisty.innerHTML = TWISTY_COLLAPSED;
+}
+
+function show(element) {
+    element.style.display = "";
+    var twisty = get_twisty_node(element.id);
+    twisty.innerHTML = TWISTY_EXPANDED;
+}
+
+function toggle(cat) {
+    var node = document.getElementById(cat)
+    if (node.style.display == "none") {
+        show(node);
+    } else {
+        hide(node);
+    }
+}
+
+</script>
+
+</head><body>
+<h1>Yeah bb</h1>
+<p><a href='javascript:hideAll()'>- collapse all</a>    <a href='javascript:showAll()'>+ expand all</a></p>
+<table width='100%'>
+<tr><td class='category' id='EMOTIONS:AGGRESSION-cat'><a class='twisty' href="javascript:toggle('EMOTIONS:AGGRESSION')"><span class='twisty'> &#9662; </span></a>EMOTIONS:AGGRESSION</td><td width='*' align='right'>133</td></tr><tr class='words' id='EMOTIONS:AGGRESSION'>
+<td style='padding-left: 1cm;' colspan='2'>
+killa<span class='word-count'>130</span> hit<span class='word-count'>2</span> 
+</td></tr>
+<tr><td class='category' id='PRIMARY:SENSATION:SOUND-cat'><a class='twisty' href="javascript:toggle('PRIMARY:SENSATION:SOUND')"><span class='twisty'> &#9662; </span></a>PRIMARY:SENSATION:SOUND</td><td width='*' align='right'>14</td></tr><tr class='words' id='PRIMARY:SENSATION:SOUND'>
+<td style='padding-left: 1cm;' colspan='2'>
+chorus<span class='word-count'>4</span> bang<span class='word-count'>3</span> clack<span class='word-count'>2</span> ring<span class='word-count'>2</span> ear<span class='word-count'>1</span> snap<span class='word-count'>1</span> 
+</td></tr>
+<tr><td class='category' id='EMOTIONS:EXPRESSIVE BEHAVIOR-cat'><a class='twisty' href="javascript:toggle('EMOTIONS:EXPRESSIVE BEHAVIOR')"><span class='twisty'> &#9662; </span></a>EMOTIONS:EXPRESSIVE BEHAVIOR</td><td width='*' align='right'>12</td></tr><tr class='words' id='EMOTIONS:EXPRESSIVE BEHAVIOR'>
+<td style='padding-left: 1cm;' colspan='2'>
+sing<span class='word-count'>10</span> sings<span class='word-count'>1</span> 
+</td></tr>
+<tr><td class='category' id='SECONDARY:SOCIAL BEHAVIOR-cat'><a class='twisty' href="javascript:toggle('SECONDARY:SOCIAL BEHAVIOR')"><span class='twisty'> &#9662; </span></a>SECONDARY:SOCIAL BEHAVIOR</td><td width='*' align='right'>11</td></tr><tr class='words' id='SECONDARY:SOCIAL BEHAVIOR'>
+<td style='padding-left: 1cm;' colspan='2'>
+say<span class='word-count'>4</span> call<span class='word-count'>2</span> confess<span class='word-count'>1</span> pardons<span class='word-count'>1</span> please<span class='word-count'>1</span> teach<span class='word-count'>1</span> 
+</td></tr>
+<tr><td class='category' id='PRIMARY:REGRESSIVE COGNITION:CONCRETENESS-cat'><a class='twisty' href="javascript:toggle('PRIMARY:REGRESSIVE COGNITION:CONCRETENESS')"><span class='twisty'> &#9662; </span></a>PRIMARY:REGRESSIVE COGNITION:CONCRETENESS</td><td width='*' align='right'>9</td></tr><tr class='words' id='PRIMARY:REGRESSIVE COGNITION:CONCRETENESS'>
+<td style='padding-left: 1cm;' colspan='2'>
+at<span class='word-count'>2</span> off<span class='word-count'>2</span> out<span class='word-count'>2</span> away<span class='word-count'>1</span> 
+</td></tr>
+<tr><td class='category' id='SECONDARY:TEMPORAL REFERENCES-cat'><a class='twisty' href="javascript:toggle('SECONDARY:TEMPORAL REFERENCES')"><span class='twisty'> &#9662; </span></a>SECONDARY:TEMPORAL REFERENCES</td><td width='*' align='right'>9</td></tr><tr class='words' id='SECONDARY:TEMPORAL REFERENCES'>
+<td style='padding-left: 1cm;' colspan='2'>
+now<span class='word-count'>2</span> everything<span class='word-count'>1</span> soon<span class='word-count'>1</span> then<span class='word-count'>1</span> time<span class='word-count'>1</span> 
+</td></tr>
+<tr><td class='category' id='SECONDARY:ABSTRACTION-cat'><a class='twisty' href="javascript:toggle('SECONDARY:ABSTRACTION')"><span class='twisty'> &#9662; </span></a>SECONDARY:ABSTRACTION</td><td width='*' align='right'>9</td></tr><tr class='words' id='SECONDARY:ABSTRACTION'>
+<td style='padding-left: 1cm;' colspan='2'>
+know<span class='word-count'>3</span> knew<span class='word-count'>2</span> figures<span class='word-count'>1</span> problems<span class='word-count'>1</span> 
+</td></tr>
+<tr><td class='category' id='EMOTIONS:AFFECTION-cat'><a class='twisty' href="javascript:toggle('EMOTIONS:AFFECTION')"><span class='twisty'> &#9662; </span></a>EMOTIONS:AFFECTION</td><td width='*' align='right'>8</td></tr><tr class='words' id='EMOTIONS:AFFECTION'>
+<td style='padding-left: 1cm;' colspan='2'>
+like<span class='word-count'>4</span> friends<span class='word-count'>2</span> 
+</td></tr>
+<tr><td class='category' id='PRIMARY:NEED:ORALITY-cat'><a class='twisty' href="javascript:toggle('PRIMARY:NEED:ORALITY')"><span class='twisty'> &#9662; </span></a>PRIMARY:NEED:ORALITY</td><td width='*' align='right'>8</td></tr><tr class='words' id='PRIMARY:NEED:ORALITY'>
+<td style='padding-left: 1cm;' colspan='2'>
+beef<span class='word-count'>1</span> eat<span class='word-count'>1</span> herb<span class='word-count'>1</span> lemon<span class='word-count'>1</span> lemonhead<span class='word-count'>1</span> lemonheads<span class='word-count'>1</span> roast<span class='word-count'>1</span> 
+</td></tr>
+<tr><td class='category' id='PRIMARY:NEED:SEX-cat'><a class='twisty' href="javascript:toggle('PRIMARY:NEED:SEX')"><span class='twisty'> &#9662; </span></a>PRIMARY:NEED:SEX</td><td width='*' align='right'>6</td></tr><tr class='words' id='PRIMARY:NEED:SEX'>
+<td style='padding-left: 1cm;' colspan='2'>
+bitch<span class='word-count'>2</span> bitches<span class='word-count'>2</span> 
+</td></tr>
+<tr><td class='category' id='PRIMARY:ICARIAN IMAGERY:HEIGHT-cat'><a class='twisty' href="javascript:toggle('PRIMARY:ICARIAN IMAGERY:HEIGHT')"><span class='twisty'> &#9662; </span></a>PRIMARY:ICARIAN IMAGERY:HEIGHT</td><td width='*' align='right'>6</td></tr><tr class='words' id='PRIMARY:ICARIAN IMAGERY:HEIGHT'>
+<td style='padding-left: 1cm;' colspan='2'>
+birds<span class='word-count'>3</span> bird<span class='word-count'>2</span> 
+</td></tr>
+<tr><td class='category' id='PRIMARY:ICARIAN IMAGERY:DESCENT-cat'><a class='twisty' href="javascript:toggle('PRIMARY:ICARIAN IMAGERY:DESCENT')"><span class='twisty'> &#9662; </span></a>PRIMARY:ICARIAN IMAGERY:DESCENT</td><td width='*' align='right'>4</td></tr><tr class='words' id='PRIMARY:ICARIAN IMAGERY:DESCENT'>
+<td style='padding-left: 1cm;' colspan='2'>
+base<span class='word-count'>1</span> bases<span class='word-count'>1</span> fellow<span class='word-count'>1</span> 
+</td></tr>
+<tr><td class='category' id='PRIMARY:NEED:ANALITY-cat'><a class='twisty' href="javascript:toggle('PRIMARY:NEED:ANALITY')"><span class='twisty'> &#9662; </span></a>PRIMARY:NEED:ANALITY</td><td width='*' align='right'>4</td></tr><tr class='words' id='PRIMARY:NEED:ANALITY'>
+<td style='padding-left: 1cm;' colspan='2'>
+
+</td></tr>
+<tr><td class='category' id='PRIMARY:REGRESSIVE COGNITION:NARCISSISM-cat'><a class='twisty' href="javascript:toggle('PRIMARY:REGRESSIVE COGNITION:NARCISSISM')"><span class='twisty'> &#9662; </span></a>PRIMARY:REGRESSIVE COGNITION:NARCISSISM</td><td width='*' align='right'>4</td></tr><tr class='words' id='PRIMARY:REGRESSIVE COGNITION:NARCISSISM'>
+<td style='padding-left: 1cm;' colspan='2'>
+eye<span class='word-count'>1</span> flesh<span class='word-count'>1</span> hands<span class='word-count'>1</span> 
+</td></tr>
+<tr><td class='category' id='PRIMARY:SENSATION:VISION-cat'><a class='twisty' href="javascript:toggle('PRIMARY:SENSATION:VISION')"><span class='twisty'> &#9662; </span></a>PRIMARY:SENSATION:VISION</td><td width='*' align='right'>3</td></tr><tr class='words' id='PRIMARY:SENSATION:VISION'>
+<td style='padding-left: 1cm;' colspan='2'>
+look<span class='word-count'>1</span> shine<span class='word-count'>1</span> 
+</td></tr>
+<tr><td class='category' id='PRIMARY:ICARIAN IMAGERY:ASCENT-cat'><a class='twisty' href="javascript:toggle('PRIMARY:ICARIAN IMAGERY:ASCENT')"><span class='twisty'> &#9662; </span></a>PRIMARY:ICARIAN IMAGERY:ASCENT</td><td width='*' align='right'>3</td></tr><tr class='words' id='PRIMARY:ICARIAN IMAGERY:ASCENT'>
+<td style='padding-left: 1cm;' colspan='2'>
+flapjack<span class='word-count'>1</span> flew<span class='word-count'>1</span> 
+</td></tr>
+<tr><td class='category' id='PRIMARY:ICARIAN IMAGERY:FIRE-cat'><a class='twisty' href="javascript:toggle('PRIMARY:ICARIAN IMAGERY:FIRE')"><span class='twisty'> &#9662; </span></a>PRIMARY:ICARIAN IMAGERY:FIRE</td><td width='*' align='right'>2</td></tr><tr class='words' id='PRIMARY:ICARIAN IMAGERY:FIRE'>
+<td style='padding-left: 1cm;' colspan='2'>
+heatmakerz<span class='word-count'>1</span> 
+</td></tr>
+<tr><td class='category' id='SECONDARY:INSTRUMENTAL BEHAVIOR-cat'><a class='twisty' href="javascript:toggle('SECONDARY:INSTRUMENTAL BEHAVIOR')"><span class='twisty'> &#9662; </span></a>SECONDARY:INSTRUMENTAL BEHAVIOR</td><td width='*' align='right'>2</td></tr><tr class='words' id='SECONDARY:INSTRUMENTAL BEHAVIOR'>
+<td style='padding-left: 1cm;' colspan='2'>
+make<span class='word-count'>1</span> 
+</td></tr>
+<tr><td class='category' id='PRIMARY:DEFENSIVE SYMBOLIZATION:PASSIVITY-cat'><a class='twisty' href="javascript:toggle('PRIMARY:DEFENSIVE SYMBOLIZATION:PASSIVITY')"><span class='twisty'> &#9662; </span></a>PRIMARY:DEFENSIVE SYMBOLIZATION:PASSIVITY</td><td width='*' align='right'>2</td></tr><tr class='words' id='PRIMARY:DEFENSIVE SYMBOLIZATION:PASSIVITY'>
+<td style='padding-left: 1cm;' colspan='2'>
+dead<span class='word-count'>1</span> 
+</td></tr>
+<tr><td class='category' id='EMOTIONS:GLORY-cat'><a class='twisty' href="javascript:toggle('EMOTIONS:GLORY')"><span class='twisty'> &#9662; </span></a>EMOTIONS:GLORY</td><td width='*' align='right'>2</td></tr><tr class='words' id='EMOTIONS:GLORY'>
+<td style='padding-left: 1cm;' colspan='2'>
+
+</td></tr>
+<tr><td class='category' id='EMOTIONS:POSITIVE AFFECT-cat'><a class='twisty' href="javascript:toggle('EMOTIONS:POSITIVE AFFECT')"><span class='twisty'> &#9662; </span></a>EMOTIONS:POSITIVE AFFECT</td><td width='*' align='right'>1</td></tr><tr class='words' id='EMOTIONS:POSITIVE AFFECT'>
+<td style='padding-left: 1cm;' colspan='2'>
+
+</td></tr>
+<tr><td class='category' id='PRIMARY:REGRESSIVE COGNITION:BRINK-PASSAGE-cat'><a class='twisty' href="javascript:toggle('PRIMARY:REGRESSIVE COGNITION:BRINK-PASSAGE')"><span class='twisty'> &#9662; </span></a>PRIMARY:REGRESSIVE COGNITION:BRINK-PASSAGE</td><td width='*' align='right'>1</td></tr><tr class='words' id='PRIMARY:REGRESSIVE COGNITION:BRINK-PASSAGE'>
+<td style='padding-left: 1cm;' colspan='2'>
+
+</td></tr>
+<tr><td class='category' id='PRIMARY:SENSATION:COLD-cat'><a class='twisty' href="javascript:toggle('PRIMARY:SENSATION:COLD')"><span class='twisty'> &#9662; </span></a>PRIMARY:SENSATION:COLD</td><td width='*' align='right'>1</td></tr><tr class='words' id='PRIMARY:SENSATION:COLD'>
+<td style='padding-left: 1cm;' colspan='2'>
+
+</td></tr>
+<tr><td class='category' id='EMOTIONS:SADNESS-cat'><a class='twisty' href="javascript:toggle('EMOTIONS:SADNESS')"><span class='twisty'> &#9662; </span></a>EMOTIONS:SADNESS</td><td width='*' align='right'>1</td></tr><tr class='words' id='EMOTIONS:SADNESS'>
+<td style='padding-left: 1cm;' colspan='2'>
+
+</td></tr>
+<tr><td class='category' id='PRIMARY:DEFENSIVE SYMBOLIZATION:RANDOM MOVEMENT-cat'><a class='twisty' href="javascript:toggle('PRIMARY:DEFENSIVE SYMBOLIZATION:RANDOM MOVEMENT')"><span class='twisty'> &#9662; </span></a>PRIMARY:DEFENSIVE SYMBOLIZATION:RANDOM MOVEMENT</td><td width='*' align='right'>1</td></tr><tr class='words' id='PRIMARY:DEFENSIVE SYMBOLIZATION:RANDOM MOVEMENT'>
+<td style='padding-left: 1cm;' colspan='2'>
+
+</td></tr>
+<tr><td class='category' id='PRIMARY:SENSATION:TASTE-cat'><a class='twisty' href="javascript:toggle('PRIMARY:SENSATION:TASTE')"><span class='twisty'> &#9662; </span></a>PRIMARY:SENSATION:TASTE</td><td width='*' align='right'>1</td></tr><tr class='words' id='PRIMARY:SENSATION:TASTE'>
+<td style='padding-left: 1cm;' colspan='2'>
+
+</td></tr>
+<tr><td class='category' id='PRIMARY:ICARIAN IMAGERY:WATER-cat'><a class='twisty' href="javascript:toggle('PRIMARY:ICARIAN IMAGERY:WATER')"><span class='twisty'> &#9662; </span></a>PRIMARY:ICARIAN IMAGERY:WATER</td><td width='*' align='right'>1</td></tr><tr class='words' id='PRIMARY:ICARIAN IMAGERY:WATER'>
+<td style='padding-left: 1cm;' colspan='2'>
+
+</td></tr>
+<tr><td class='category' id='SECONDARY:ORDER-cat'><a class='twisty' href="javascript:toggle('SECONDARY:ORDER')"><span class='twisty'> &#9662; </span></a>SECONDARY:ORDER</td><td width='*' align='right'>1</td></tr><tr class='words' id='SECONDARY:ORDER'>
+<td style='padding-left: 1cm;' colspan='2'>
+
+</td></tr>
+<tr><td class='category' id='PRIMARY:SENSATION:ODOR-cat'><a class='twisty' href="javascript:toggle('PRIMARY:SENSATION:ODOR')"><span class='twisty'> &#9662; </span></a>PRIMARY:SENSATION:ODOR</td><td width='*' align='right'>1</td></tr><tr class='words' id='PRIMARY:SENSATION:ODOR'>
+<td style='padding-left: 1cm;' colspan='2'>
+
+</td></tr>
+</table>
+<table>
+<tr><td>PRIMARY:</td><td>27.307692 %</td></tr>
+<tr><td>SECONDARY:</td><td>12.307692 %</td></tr>
+<tr><td>EMOTIONS:</td><td>60.384615 %</td></tr>
+<table>
+<p>788 words total</p>
+</body></html>

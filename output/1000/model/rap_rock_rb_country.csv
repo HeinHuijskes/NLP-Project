@@ -1,3 +1,3 @@
-,model,accuracy,f1score,time
-0,Logistic Regression,0.6825,0.680233389132056,14.688579797744751
-0,MultinomialNB,0.7225,0.7156845936833047,3.7221381664276123
+,Model,accuracy,f1score
+0,MultinomialNB,0.7325,0.7297295746249328
+0,LogisticRegression,0.6675,0.6698624289458296
