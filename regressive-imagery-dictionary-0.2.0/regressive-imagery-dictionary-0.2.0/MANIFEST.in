@@ -1,8 +1,0 @@
-include LICENSE
-include README
-
-exclude .bumpversion.cfg
-exclude requirements.txt
-exclude tasks.py
-
-recursive-exclude * *.py[co]

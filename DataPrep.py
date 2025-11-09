@@ -266,13 +266,13 @@ def preprocess(docs: list[str], stem_words=True, limit=0, debug=False, return_co
 
     if debug: print("Finished data preparation!")
     if not return_count:
-        return [' '.join(doc) for doc in documents]
+        return [' '.join(doc) for doc in documents], [line_quantiles, token_quantiles, tpl_quantiles]
     else:
         old, total, documents = documents
         return old, total, documents
 
 
-def preprocess_validation(docs: list[str], vectorizer, line_quantiles, token_quantiles, tpl_quantiles, use_rid, use_length) -> list[str]:
+def preprocess_validation(docs: list[str], line_quantiles, token_quantiles, tpl_quantiles, use_rid, use_length) -> list[str]:
     noteless = remove_notes(docs)
 
     # Count number of lines per song
